@@ -1,0 +1,16 @@
+
+
+.Title {
+  font-size: 36px;
+  color: whitesmoke;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: absolute;
+
+  /* alignment to top left of the page */
+  top: 20px;     
+  left: 20px;     
+  margin: 0;
+
+}
+
