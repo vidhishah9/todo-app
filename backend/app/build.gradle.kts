@@ -4,10 +4,12 @@
  * This generated file contains a sample Kotlin application project to get you started.
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/9.2.1/userguide/building_java_projects.html in the Gradle documentation.
  */
+import com.google.protobuf.gradle.id
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    alias(libs.plugins.kotlin.jvm)
+   alias(libs.plugins.kotlin.jvm)
+   id("com.google.protobuf") version "0.9.4" 
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
@@ -26,6 +28,41 @@ dependencies {
 
     // This dependency is used by the application.
     implementation(libs.guava)
+
+
+    implementation("io.grpc:grpc-kotlin-stub:1.4.1")  
+    implementation("io.grpc:grpc-netty-shaded:1.71.0")  
+    implementation("io.grpc:grpc-protobuf:1.71.0")
+    implementation("com.google.protobuf:protobuf-kotlin:4.30.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+
+}
+
+protobuf {  
+    protoc {  
+        artifact = "com.google.protobuf:protoc:4.30.2"  
+    }  
+    plugins {  
+         create("grpc") {
+         path = "${System.getProperty("user.home")}/bin/protoc-gen-grpc-java"
+
+         }
+
+        create("grpckt") {  
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.4.1:jdk8@jar"  
+        }  
+    }  
+    generateProtoTasks {  
+        all().forEach {  
+            it.builtins {  
+                create("kotlin")  
+            }  
+            it.plugins {  
+                id("grpc")  
+                id("grpckt")  
+            }  
+        } 
+    }
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -44,3 +81,4 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+

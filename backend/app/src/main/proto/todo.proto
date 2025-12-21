@@ -1,0 +1,24 @@
+
+syntax = "proto3";
+
+package todo;
+
+service TodoService {
+  rpc AddTodo (TodoItem) returns (TodoResponse);
+  rpc ListTodos (Empty) returns (TodoList);
+}
+
+message TodoItem {
+  string id = 1;
+  string task = 2;
+}
+
+message TodoResponse {
+  bool success = 1;
+}
+
+message TodoList {
+  repeated TodoItem todos = 1;
+}
+
+message Empty {}
