@@ -30,11 +30,13 @@ dependencies {
     implementation(libs.guava)
 
 
-    implementation("io.grpc:grpc-kotlin-stub:1.4.1")  
-    implementation("io.grpc:grpc-netty-shaded:1.71.0")  
-    implementation("io.grpc:grpc-protobuf:1.71.0")
+    implementation("io.grpc:grpc-kotlin-stub:1.5.0")  
+    implementation("io.grpc:grpc-netty-shaded:1.77.0")  
+    implementation("io.grpc:grpc-protobuf:1.77.0")
     implementation("com.google.protobuf:protobuf-kotlin:4.30.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
+    implementation("io.grpc:grpc-stub:1.77.0")
+
 
 }
 
@@ -74,11 +76,12 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.AppKt"
+    mainClass = "org.example.service.AppKt"
 }
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
 
