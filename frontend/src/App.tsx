@@ -1,20 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import CreateTask from './components/CreateTask';
-import Title from './components/Title';
+import { useEffect, useState } from 'react';
+import { getTodos } from './grpc/client';
+import TodoForm from './components/TodoForm';
+import { TodoItem } from './generated/todo_pb';
 
-function App() {
+export default function TodoApp() {
+  const [todos, setTodos] = useState<TodoItem[]>([]);
+
+  const fetchTodos = async () => {
+    try {
+      const list = await getTodos();
+      setTodos(list);
+    } catch (err) {
+      console.error('Failed to fetch todos', err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <Title />        
-        <CreateTask />
-        
-      </header>
-      
+    <div>
+      <h1>Todos</h1>
+      <TodoForm onAdd={fetchTodos} />
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.getId()}>{todo.getTask()}</li>
+        ))}
+      </ul>
     </div>
   );
 }
-
-export default App;
