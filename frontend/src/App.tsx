@@ -1,5 +1,4 @@
-// App.tsx (TodoApp)
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getTodos, removeTodo } from './grpc/client';
 import TodoForm from './components/TodoForm';
 import { TodoItem } from './generated/todo_pb';
@@ -8,6 +7,7 @@ import './App.css';
 
 export default function TodoApp() {
   const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [completedIds, setCompletedIds] = useState<Set<string>>(new Set());
 
   const fetchTodos = async () => {
     try {
@@ -21,10 +21,27 @@ export default function TodoApp() {
   const handleDelete = async (id: string) => {
     try {
       const ok = await removeTodo(id);
-      if (ok) await fetchTodos();
+      if (ok) {
+        // also remove from completed set
+        setCompletedIds(prev => {
+          const next = new Set(prev);
+          next.delete(id);
+          return next;
+        });
+        await fetchTodos();
+      }
     } catch (err) {
       console.error('Failed to delete todo', err);
     }
+  };
+
+  const toggleComplete = (id: string) => {
+    setCompletedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
   };
 
   useEffect(() => {
@@ -44,19 +61,33 @@ export default function TodoApp() {
         <TodoForm onAdd={fetchTodos} />
 
         <ul className="todoList">
-          {todos.map((todo) => (
-            <li className="todoItem" key={todo.getId()}>
-              <span className="todoText">{todo.getTask()}</span>
-              <button
-                className="deleteBtn"
-                aria-label="delete"
-                type="button"
-                onClick={() => handleDelete(todo.getId())}
-              >
-                ×
-              </button>
-            </li>
-          ))}
+          {todos.map((todo) => {
+            const id = todo.getId();
+            const done = completedIds.has(id);
+
+            return (
+              <li className={`todoItem ${done ? 'done' : ''}`} key={id}>
+                {/* clickable circle */}
+                <button
+                  type="button"
+                  className={`checkBtn ${done ? 'checked' : ''}`}
+                  aria-label={done ? 'Mark as not completed' : 'Mark as completed'}
+                  onClick={() => toggleComplete(id)}
+                />
+
+                <span className="todoText">{todo.getTask()}</span>
+
+                <button
+                  className="deleteBtn"
+                  aria-label="delete"
+                  type="button"
+                  onClick={() => handleDelete(id)}
+                >
+                  ×
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
