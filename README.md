@@ -6,8 +6,8 @@ A simple full-stack to-do list built to learn gRPC end-to-end:
 ## What it does
 - Add a task
 - List tasks
-- Delete a task (RemoveTodo)
-- Mark complete (UI cross-out — local state only)
+- Delete a task 
+- Mark complete 
 
 ## Tech
 **Backend**
