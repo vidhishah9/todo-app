@@ -1,0 +1,45 @@
+.todoForm {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.todoInput {
+  flex: 1;
+  height: 46px;
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  background: var(--pill);
+  padding: 0 18px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.todoInput::placeholder {
+  color: #a0a8b8;
+}
+
+.addBtn {
+  height: 46px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(239, 106, 74, 0.25);
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.addBtn:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px);
+}
+
+.addBtn:active {
+  transform: translateY(0px);
+}
