@@ -28,4 +28,20 @@ A simple full-stack to-do list built to learn gRPC end-to-end:
 ### 1) Start the backend (Kotlin gRPC server)
 ```bash
 cd backend
-./gradlew :app:run
+./gradlew run
+```
+### 2) Start the gRPC-Web proxy (for the frotnend to connect with the backend)
+```bash
+grpcwebproxy \
+  --backend_addr=localhost:50051 \
+  --run_tls_server=false \
+  --allow_all_origins
+```
+### 3) Start the frontend (React)
+```bash
+npm run start
+```
+
+
+
+
