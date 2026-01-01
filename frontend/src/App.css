@@ -1,13 +1,12 @@
-/* Page background like screenshot */
 :root {
-  --bg1: #0d1b5f;
-  --bg2: #0a0f3a;
   --card: #ffffff;
   --muted: #8a93a6;
   --text: #1b2540;
   --accent: #ef6a4a;
   --accent-dark: #e2593c;
   --pill: #f1f3f6;
+  --page: #f6f7fb;
+  --line: rgba(20, 35, 83, 0.08);
 }
 
 * { box-sizing: border-box; }
@@ -15,7 +14,7 @@
 body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-  background: radial-gradient(1200px 700px at 30% 15%, #1c3a9e 0%, var(--bg1) 35%, var(--bg2) 100%);
+  background: var(--page); /* simple clean background */
   min-height: 100vh;
   color: var(--text);
 }
@@ -24,37 +23,41 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 32px 16px;
+  padding: 48px 20px;
 }
 
 .card {
-  width: min(520px, 92vw);
+  width: min(920px, 95vw);   /* bigger */
+  min-height: 540px;         /* makes it feel like an app */
   background: var(--card);
-  border-radius: 18px;
-  padding: 28px 26px 22px;
+  border-radius: 22px;
+  padding: 36px 40px 30px;
   box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.25),
-    0 2px 10px rgba(0, 0, 0, 0.08);
+    0 24px 80px rgba(0, 0, 0, 0.10),
+    0 6px 18px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .headerRow {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
 }
 
 .title {
   margin: 0;
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 34px;            /* bigger title */
+  font-weight: 850;
   letter-spacing: -0.02em;
   color: #142353;
 }
 
 .titleIcon {
   margin-left: 6px;
-  font-size: 22px;
+  font-size: 24px;
   vertical-align: middle;
 }
 
@@ -72,17 +75,18 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 44px 12px 16px; /* left padding smaller because circle is a real button now */
-  border-radius: 12px;
+  padding: 14px 44px 14px 16px;
+  border-radius: 14px;
+  background: rgba(20, 35, 83, 0.03); /* subtle row background */
   transition: background 120ms ease, transform 120ms ease;
 }
 
 .todoItem:hover {
-  background: rgba(20, 35, 83, 0.04);
+  background: rgba(20, 35, 83, 0.06);
   transform: translateY(-1px);
 }
 
-/* NEW: clickable circle button */
+/* Clickable circle button */
 .checkBtn {
   width: 22px;
   height: 22px;
@@ -118,12 +122,12 @@ body {
 
 /* Text */
 .todoText {
-  font-size: 16px;
+  font-size: 18px; /* slightly bigger */
   line-height: 1.2;
   color: #1b2540;
 }
 
-/* NEW: cross-out when completed */
+/* Cross-out when completed */
 .todoItem.done .todoText {
   text-decoration: line-through;
   color: #a0a8b8;
@@ -135,8 +139,8 @@ body {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border: none;
   background: transparent;
   border-radius: 999px;

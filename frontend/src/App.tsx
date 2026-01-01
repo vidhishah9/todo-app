@@ -52,7 +52,7 @@ export default function TodoApp() {
     <div className="page">
       <div className="card">
         <div className="headerRow">
-          <Ttile />
+          {/* <Ttile /> */}
           <h1 className="title">
             To-Do List <span className="titleIcon">📝</span>
           </h1>
