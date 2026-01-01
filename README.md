@@ -30,7 +30,7 @@ A simple full-stack to-do list built to learn gRPC end-to-end:
 cd backend
 ./gradlew run
 ```
-### 2) Start the gRPC-Web proxy (for the frotnend to connect with the backend)
+### 2) Start the gRPC-Web proxy (for the frontend to connect with the backend)
 ```bash
 grpcwebproxy \
   --backend_addr=localhost:50051 \
