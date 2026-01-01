@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { getTodos } from './grpc/client';
 import TodoForm from './components/TodoForm';
 import { TodoItem } from './generated/todo_pb';
+import Ttile from './components/Title';
 
 export default function TodoApp() {
   const [todos, setTodos] = useState<TodoItem[]>([]);
-
+  
   const fetchTodos = async () => {
     try {
       const list = await getTodos();
@@ -21,6 +22,7 @@ export default function TodoApp() {
 
   return (
     <div>
+      <Ttile></Ttile>
       <h1>Todos</h1>
       <TodoForm onAdd={fetchTodos} />
       <ul>
