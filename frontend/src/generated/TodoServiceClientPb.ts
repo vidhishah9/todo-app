@@ -125,5 +125,48 @@ export class TodoServiceClient {
     this.methodDescriptorListTodos);
   }
 
+  methodDescriptorRemoveTodo = new grpcWeb.MethodDescriptor(
+    '/todo.TodoService/RemoveTodo',
+    grpcWeb.MethodType.UNARY,
+    todo_pb.TodoId,
+    todo_pb.TodoResponse,
+    (request: todo_pb.TodoId) => {
+      return request.serializeBinary();
+    },
+    todo_pb.TodoResponse.deserializeBinary
+  );
+
+  removeTodo(
+    request: todo_pb.TodoId,
+    metadata?: grpcWeb.Metadata | null): Promise<todo_pb.TodoResponse>;
+
+  removeTodo(
+    request: todo_pb.TodoId,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: todo_pb.TodoResponse) => void): grpcWeb.ClientReadableStream<todo_pb.TodoResponse>;
+
+  removeTodo(
+    request: todo_pb.TodoId,
+    metadata?: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: todo_pb.TodoResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/todo.TodoService/RemoveTodo',
+        request,
+        metadata || {},
+        this.methodDescriptorRemoveTodo,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/todo.TodoService/RemoveTodo',
+    request,
+    metadata || {},
+    this.methodDescriptorRemoveTodo);
+  }
+
 }
 

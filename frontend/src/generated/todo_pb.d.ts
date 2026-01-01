@@ -2,6 +2,24 @@ import * as jspb from 'google-protobuf'
 
 
 
+export class TodoId extends jspb.Message {
+  getId(): string;
+  setId(value: string): TodoId;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): TodoId.AsObject;
+  static toObject(includeInstance: boolean, msg: TodoId): TodoId.AsObject;
+  static serializeBinaryToWriter(message: TodoId, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): TodoId;
+  static deserializeBinaryFromReader(message: TodoId, reader: jspb.BinaryReader): TodoId;
+}
+
+export namespace TodoId {
+  export type AsObject = {
+    id: string;
+  };
+}
+
 export class TodoItem extends jspb.Message {
   getId(): string;
   setId(value: string): TodoItem;
