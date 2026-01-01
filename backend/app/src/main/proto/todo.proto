@@ -6,6 +6,12 @@ package todo;
 service TodoService {
   rpc AddTodo (TodoItem) returns (TodoResponse);
   rpc ListTodos (Empty) returns (TodoList);
+  rpc RemoveTodo (TodoId) returns (TodoResponse); 
+
+}
+
+message TodoId {
+  string id = 1;
 }
 
 message TodoItem {
