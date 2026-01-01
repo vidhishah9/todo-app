@@ -1,6 +1,6 @@
 // client.ts
 import { TodoServiceClient } from '../generated/TodoServiceClientPb';
-import { TodoItem, Empty } from '../generated/todo_pb';
+import { TodoItem, Empty, TodoId } from '../generated/todo_pb';
 
 const client = new TodoServiceClient('http://localhost:8080', null, null);
 
@@ -25,3 +25,16 @@ export const getTodos = (): Promise<TodoItem[]> => {
     });
   });
 };
+
+export const removeTodo = (id: string): Promise<boolean> => {
+  const request = new TodoId();
+  request.setId(id);
+
+  return new Promise((resolve, reject) => {
+    client.removeTodo(request, {}, (err, response) => {
+      if (err) return reject(err);
+      resolve(response.getSuccess());
+    });
+  });
+};
+
