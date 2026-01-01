@@ -21,4 +21,11 @@ A simple full-stack to-do list built to learn gRPC end-to-end:
 
 ---
 
-## Project layout
+## How to run locally
+
+> You’ll run **three things**: the gRPC backend, the gRPC-Web proxy, and the React frontend.
+
+### 1) Start the backend (Kotlin gRPC server)
+```bash
+cd backend
+./gradlew :app:run
