@@ -7,6 +7,8 @@ import java.util.UUID
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class TodoServiceImpl : TodoServiceGrpcKt.TodoServiceCoroutineImplBase() {
 
@@ -39,4 +41,15 @@ class TodoServiceImpl : TodoServiceGrpcKt.TodoServiceCoroutineImplBase() {
         items.forEach { builder.addTodos(it) }
         return builder.build()
     }
+    
+    override suspend fun removeTodo(request: Todo.TodoId): Todo.TodoResponse {
+    val deletedCount = transaction {
+        TodosTable.deleteWhere { TodosTable.id eq request.id }
+    }
+
+    return Todo.TodoResponse.newBuilder()
+        .setSuccess(deletedCount > 0)
+        .build()
+}
+
 }
