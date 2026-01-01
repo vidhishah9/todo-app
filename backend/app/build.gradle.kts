@@ -36,6 +36,11 @@ dependencies {
     implementation("com.google.protobuf:protobuf-kotlin:4.30.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.1")
     implementation("io.grpc:grpc-stub:1.77.0")
+    implementation("org.jetbrains.exposed:exposed-core:0.53.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.53.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.53.0")
+    implementation("org.xerial:sqlite-jdbc:3.46.1.0")
+
 
 
 }

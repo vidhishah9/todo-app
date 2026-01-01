@@ -1,5 +1,6 @@
 package org.example.service
 import io.grpc.ServerBuilder
+import org.example.db.Db
 
 
 
@@ -11,6 +12,7 @@ class App {
 }
 
 fun main() {
+    Db.init()
     val server = ServerBuilder
         .forPort(50051)
         .addService(TodoServiceImpl())
